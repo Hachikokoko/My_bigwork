@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rela_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlue">
+
+            <TextView
+                android:id="@+id/mingyan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="及时当勉励，岁月不待人。——陶渊明"
+                android:textColor="@color/colorGray"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/daka"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="60dp"
+                android:layout_toRightOf="@id/mingyan"
+                android:background="@drawable/daka" />
+
+            <ImageView
+                android:id="@+id/shijianimg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/mingyan"
+                android:background="@drawable/shijian" />
+
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mingyan"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/shijianimg"
+                android:text="2020年00月00日"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_tv"
+                android:layout_marginLeft="88dp"
+                android:layout_marginTop="5dp"
+                android:text="12:00:00"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/daiban"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/rela_01"
+            android:layout_marginLeft="15dp"
+            android:text="待办"
+            android:textColor="@color/colorblack" />
+
+        <ListView
+            android:id="@+id/list_item"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_below="@+id/daiban"
+            android:layout_marginBottom="45dp" />
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/rela_01"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="390dp"
+            android:background="@drawable/add_after" />
+    </RelativeLayout>
+
+
+</LinearLayout>

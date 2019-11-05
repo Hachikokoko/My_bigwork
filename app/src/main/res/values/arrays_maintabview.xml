@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tab_array">
+        <item>计划</item>
+        <item>天气</item>
+        <item>添加计划</item>
+        <item>日记</item>
+        <item>我的</item>
+    </string-array>
+</resources>

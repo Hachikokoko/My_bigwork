@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">再见懒人</string>
+    <string name="api">http://wthrcdn.etouch.cn/weather_mini?city=</string>
+    <string-array name="repeat_days">
+        <item>星期日</item>
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+    </string-array>
+
+
+    <string name="list_item_time">00 : 00</string>
+    <string name="list_item_name">name</string>
+    <string name="list_item_repeat">repeat</string>
+
+    <string name="details_alarm_name">给闹钟起个名吧…</string>
+    <string name="details_repeat_name">重复</string>
+    <string name="details_repeat_choice">选择重复</string>
+    <string name="details_tone_name">铃声</string>
+    <string name="details_tone_choice">选择铃声</string>
+
+    <string name="head_details">闹钟设置</string>
+    <string name="head_list">闹钟列表</string>
+    <string name="head_image_des">lable</string>
+
+
+    <string name="screen_button">取  消</string>
+    <string name="screen_msg">起床啦</string>
+</resources>

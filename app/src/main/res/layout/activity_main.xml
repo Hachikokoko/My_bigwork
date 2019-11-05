@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bxll="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+    <LinearLayout
+        android:padding="8dp"
+        android:background="#ffeeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <com.example.thememorandum.View.Main_TabView
+            android:id="@+id/tab_home"
+            bxll:tabImage="@drawable/zhuye"
+            bxll:tabSelectedImage="@drawable/zhuye_after"
+            bxll:tabColor="#FF1296db"
+            bxll:tabTitle="主页"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <com.example.thememorandum.View.Main_TabView
+            android:id="@+id/tab_team"
+            bxll:tabImage="@drawable/tuandui"
+            bxll:tabSelectedImage="@drawable/tuandui_after"
+            bxll:tabColor="#FF1296db"
+            bxll:tabTitle="团队"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <com.example.thememorandum.View.Main_TabView
+            android:id="@+id/tab_data"
+            bxll:tabImage="@drawable/shuju"
+            bxll:tabSelectedImage="@drawable/shuju_after"
+            bxll:tabColor="#FF1296db"
+            bxll:tabTitle="数据统计"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <com.example.thememorandum.View.Main_TabView
+            android:id="@+id/tab_diary"
+            bxll:tabColor="#FF1296db"
+            bxll:tabImage="@drawable/riji"
+            bxll:tabSelectedImage="@drawable/riji_after"
+            bxll:tabTitle="日记"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <com.example.thememorandum.View.Main_TabView
+            android:id="@+id/tab_mine"
+            bxll:tabImage="@drawable/wode"
+            bxll:tabSelectedImage="@drawable/wode_after"
+            bxll:tabColor="#FF1296db"
+            bxll:tabTitle="我的"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+</FrameLayout>

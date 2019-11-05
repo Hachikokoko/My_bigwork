@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--上划线-->
+    <View
+        android:id="@+id/divide_top"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorblack"/>
+
+<!--    包含imageView和TextView和imageView-->
+    <!--下划线-->
+    <LinearLayout
+        android:id="@+id/linerlayout_root"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/imageview_left"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+
+        <TextView
+            android:id="@+id/mine_mian_layout_textview"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:textColor="@color/colorblack"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/imageview_right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/arrow"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/divide_buttom"
+        android:layout_marginLeft="66dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorblack"
+        />
+</LinearLayout>

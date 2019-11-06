@@ -26,7 +26,8 @@
             android:layout_height="45dp"
             android:layout_marginLeft="140dp"
             android:background="@drawable/myview_edittext"
-            android:hint="城市:东莞"
+            android:hint="东莞"
+            android:textColor="#eeb4b4"
             android:gravity="center"/>
 
         <Button
@@ -121,6 +122,7 @@
             android:text="CITY"
             android:textSize="30sp"
             android:id="@+id/tv_city"
+            android:textColor="#eeb4b4"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
         <LinearLayout

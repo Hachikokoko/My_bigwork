@@ -9,9 +9,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
+import android.net.Network;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -29,10 +32,28 @@ import com.baidu.location.LocationClientOption;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.AlarmUtils;
 import com.example.thememorandum.Utils.MyApplication;
+import com.example.thememorandum.Utils.NetworkUtil;
+import com.example.thememorandum.Utils.Weather_WeekTool;
+import com.example.thememorandum.Utils.Weather_streamTool;
+import com.example.thememorandum.Weather.Weather;
 import com.example.thememorandum.Weather.WeatherActivity;
+import com.example.thememorandum.Weather.WeatherInfo;
 import com.example.thememorandum.db.AlarmTableManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
+import es.dmoral.toasty.Toasty;
 
 public class AlarmDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     private AlarmTableManager tableManager;
@@ -60,31 +81,50 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
     private int setalarm_min;
     private String getlabel;
     private long id;
+    private final static int SUCCESS = 1;
+    private final static int FAIL = 0;
+    private final static  int update=1;
 
     private TextView wendu;
+    private String date;
 
     private TextView type;
-    private TextView fengli;
     private TextView min;
     private TextView max;
     private RelativeLayout relativeLayout;
+    private String nowcity;
 
     private LocationClient locationClient = null;
     private LocationClientOption option;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SUCCESS:
+                    WeatherInfo info = (WeatherInfo) msg.obj;
+                    updateUI(info);
+                    break;
+                case FAIL:
+                    String str = (String) msg.obj;
+                    Toasty.custom(MyApplication.getContext(), str,R.drawable.tishi, R.color.colorAccent,Toast.LENGTH_SHORT,true,true).show();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_details);
+        nowcity=this.getResources().getString(R.string.nowcity);
         tableManager = new AlarmTableManager(this);
-        initView();
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (AlarmDetailsActivity.this.checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
-            }
+        if (!NetworkUtil.isNetworkAbailable(this))
+        {
+            Toasty.custom(MyApplication.getContext(), " 无网络连接",R.drawable.duankai, R.color.colorRed,Toast.LENGTH_SHORT,true,true).show();
         }
+        initView();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        date=format.format(new Date());
         locationClient = new LocationClient(getApplicationContext());
         locationClient.registerLocationListener(new LocationListenner());
         option = new LocationClientOption();
@@ -97,6 +137,16 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
         locationClient.setLocOption(option);
         locationClient.start();
         locationClient.requestLocation();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message msg = Message.obtain();
+                getweather(nowcity);
+                msg.what=update;
+                msg.obj="更新recycleview";
+            }
+        }).start();
     }
 
     private void initView() {
@@ -114,7 +164,6 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
 
         wendu = this.findViewById(R.id.wendu);
         type = this.findViewById(R.id.type);
-        fengli = this.findViewById(R.id.fengli);
         min = this.findViewById(R.id.min);
         max = this.findViewById(R.id.max);
         relativeLayout = this.findViewById(R.id.wendu_relativelayout);
@@ -168,9 +217,11 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
                 if (getlabel != null && name.getText().toString().length() != 0) {
                     save();
                 } else if (name.getText().toString().length() == 0) {
-                    Toast.makeText(MyApplication.getContext(), "你连做啥事都不知道，这是不行滴", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MyApplication.getContext(), "你连做啥事都不知道，这是不行滴", Toast.LENGTH_SHORT).show();
+                    Toasty.custom(MyApplication.getContext(), "你要干啥呢",R.drawable.wenhao, R.color.colorAccent,Toast.LENGTH_SHORT,true,true).show();
                 } else if (getlabel == null) {
-                    Toast.makeText(MyApplication.getContext(), "标签还没选呢！", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MyApplication.getContext(), "标签还没选呢！", Toast.LENGTH_SHORT).show();
+                    Toasty.custom(MyApplication.getContext(), "标签还没选呢",R.drawable.jinggao, R.color.colorAccent,Toast.LENGTH_SHORT,true,true).show();
                 }
                 break;
 
@@ -329,10 +380,12 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
      * 保存闹钟
      */
     private void save() {
+
         alarmModel.setHour(setalarm_hour);
         alarmModel.setMinute(setalarm_min);
         alarmModel.setName(name.getText().toString());
         alarmModel.setLabel(getlabel);
+        alarmModel.setDate(date);
         int day = -1;
         if (id == -1) {
             alarmModel.setEnable(true);
@@ -378,9 +431,88 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
             String district = location.getDistrict();    //获取区县
             String street = location.getStreet();    //获取街道信息
             Log.d("123", city);
-
-
         }
+    }
 
+    private void updateUI(WeatherInfo info) {
+        String now =info.getWendu()+"";
+        wendu.setText(now);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        int week = cal.get(Calendar.DAY_OF_WEEK);
+        setData(info.get(0),max,min,type,null);
+    }
+
+    protected void setData(Weather weather, TextView r_max, TextView r_min, TextView r_type, TextView r_date) {
+        r_max.setText(weather.heigh);
+        r_min.setText(weather.low);
+        r_type.setText(weather.type);
+        if (r_date!=null)
+            r_date.setText(Weather_WeekTool.transform(weather.date));
+    }
+
+    private void fail(String str) {
+        Message msg = Message.obtain();
+        msg.what = FAIL;
+        msg.obj = str;
+        handler.sendMessage(msg);
+    }
+    private void getweather(String city)
+    {
+        WeatherInfo info = new WeatherInfo(city);
+        String sUrl = getResources().getString(R.string.api)+city;
+        Log.d("TAG_APP", sUrl);
+        try {
+            URL url = new URL(sUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5000);
+            conn.setRequestMethod("GET");
+            int code = conn.getResponseCode();
+            if (code != 200){
+                fail("获取数据失败");
+                return;
+            }
+            InputStream in = conn.getInputStream();
+            String content = Weather_streamTool.transform(in);
+            JSONObject jsonObject = new JSONObject(content);
+            if (!"OK".equals(jsonObject.get("desc"))){
+                fail("获取数据失败");
+                return;
+            }
+            jsonObject = jsonObject.optJSONObject("data");
+            String wendu = jsonObject.optString("wendu");
+            String note = jsonObject.optString("ganmao");
+            String aqi = jsonObject.optString("aqi");
+            info.setWendu(wendu);
+            if (!"".equals(aqi)){
+                info.setAqi(Integer.parseInt(aqi));
+            }
+            info.setNote(note);
+            JSONArray jsonArray = jsonObject.optJSONArray("forecast");
+            for (int i=0;i<jsonArray.length();i++) {
+                JSONObject obj = jsonArray.optJSONObject(i);
+                Weather weather = new Weather();
+                weather.fengxiang = obj.optString("fengxiang");
+                weather.fengli = obj.optString("fengli");
+                weather.date = obj.optString("date");
+                String max[]=obj.optString("high").split(" ");
+                weather.heigh = max[1];
+                String min[]=obj.optString("low").split(" ");
+                weather.low = min[1];
+                weather.type = obj.optString("type");
+                info.addWeather(weather);
+            }
+            Message msg = Message.obtain();
+            msg.what=SUCCESS;
+            msg.obj=info;
+            handler.sendMessage(msg);
+            Log.d("TAG_APP","");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

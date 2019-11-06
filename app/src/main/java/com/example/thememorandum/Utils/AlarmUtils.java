@@ -4,9 +4,12 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.thememorandum.Alarm.AlarmModel;
+import com.example.thememorandum.R;
 import com.example.thememorandum.db.AlarmTableManager;
 
 import java.util.Calendar;
+
+import es.dmoral.toasty.Toasty;
 
 public class AlarmUtils
 {
@@ -84,7 +87,8 @@ public class AlarmUtils
             toast = remindDay + "天 " + remindHour + "小时 " + remindMin + "分钟后提醒";
         else
             toast = remindHour + "小时 " + remindMin + "分钟后提醒";
-        Toast.makeText(context, toast, Toast.LENGTH_LONG).show();
+        Toasty.custom(MyApplication.getContext(), toast, R.drawable.shiwutixing,R.color.colorAccent,Toast.LENGTH_LONG,true,true).show();
+
     }
 
 }

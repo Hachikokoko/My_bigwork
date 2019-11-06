@@ -15,7 +15,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="15dp"
-            app:background_color="#e89abe"
+            app:background_color="@color/colorBlue"
             app:border_color="@color/colorWhite" />
 
         <TextView

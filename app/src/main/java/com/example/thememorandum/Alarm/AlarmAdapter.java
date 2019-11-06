@@ -1,4 +1,4 @@
-package com.example.thememorandum;
+package com.example.thememorandum.Alarm;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.thememorandum.Alarm.AlarmModel;
+import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.AlarmUtils;
 import com.example.thememorandum.Utils.MyApplication;
 import com.uniquestudio.library.CircleCheckBox;

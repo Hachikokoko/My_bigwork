@@ -1,11 +1,16 @@
 package com.example.thememorandum.Fragment;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +21,15 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.thememorandum.Alarm.AlarmAdapter;
 import com.example.thememorandum.Alarm.AlarmDetailsActivity;
 import com.example.thememorandum.Alarm.AlarmModel;
 import com.example.thememorandum.Alarm.AlarmSetClock;
-import com.example.thememorandum.AlarmAdapter;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.AlarmUtils;
+import com.example.thememorandum.Utils.MyApplication;
 import com.example.thememorandum.db.AlarmTableManager;
+import com.example.thememorandum.db.MyDBHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +38,8 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import es.dmoral.toasty.Toasty;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -41,6 +50,8 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
     private AlarmAdapter alarmAdapter;
     private List<AlarmModel> mList = new ArrayList<>();
     private Button addBtn;
+    private Button daka;
+    private MyDBHelper dbHelper;
 
     //初始化线程管理类，在UI中显示时间
     private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
@@ -64,6 +75,9 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
         ListView listView = view.findViewById(R.id.list_item);
         addBtn = view.findViewById(R.id.add_btn);
         addBtn.setOnClickListener(this);
+        dbHelper=new MyDBHelper(MyApplication.getContext(),"TP.db",null,1);
+        daka=view.findViewById(R.id.daka);
+        daka.setOnClickListener(this);
         alarmAdapter = new AlarmAdapter(getActivity(), mList, new AlarmAdapter.OnClickCallBack() {
             @Override
             public void setAlarmEnable(long id, boolean isChecked) {
@@ -158,7 +172,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
             alarm.setEnable(isChecked);
             tableManager.updateAlarm(alarm);
             AlarmSetClock.cancelAlarm(getActivity(), alarm);
-            Toast.makeText(getActivity(), alarm.getName() + " 闹钟已取消", Toast.LENGTH_SHORT).show();
+            Toasty.custom(getActivity(), alarm.getName() + " 取消提醒",R.drawable.quxiaotixing1, R.color.colorAccent,Toast.LENGTH_SHORT,true,true).show();
         }
         notifyList();
     }
@@ -170,11 +184,13 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
             alarm.setfished(isChecked);
             tableManager.updateAlarm(alarm);
             tableManager.updateAlarm_all(alarm);
+            Toasty.custom(MyApplication.getContext(), "继续加油",R.drawable.zan, R.color.colorBlue,Toast.LENGTH_SHORT,true,true).show();
+
         } else {
             alarm.setfished(isChecked);
             tableManager.updateAlarm(alarm);
             tableManager.updateAlarm_all(alarm);
-            Toast.makeText(getActivity(), " 已完成", Toast.LENGTH_SHORT).show();
+            Toasty.custom(MyApplication.getContext(), "努力呀",R.drawable.nvli, R.color.colorBlue,Toast.LENGTH_SHORT,true,true).show();
         }
         notifyList();
     }
@@ -197,7 +213,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
                 tableManager.deleteAlarm(mId);
                 alarmAdapter.setData(tableManager.getAlarms());
                 alarmAdapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_SHORT).show();
+                Toasty.custom(MyApplication.getContext(), " 删除成功",R.drawable.clear, R.color.colorAccent,Toast.LENGTH_SHORT,true,true).show();
             }
         });
         builder.create().show();
@@ -205,6 +221,44 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        startAlarmDetailsActivity(-1);
+       switch (v.getId())
+       {
+           case R.id.add_btn:
+               startAlarmDetailsActivity(-1);
+               break;
+           case R.id.daka:
+               SQLiteDatabase db=dbHelper.getWritableDatabase();
+               SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+               String date=format.format(new Date());
+               int daka=1;
+               int flag=0;
+               Cursor cursor=db.query("Clock", new String[]{"date"},null,null,null,null,null);
+               if(cursor.moveToFirst())
+               {
+                   do
+                       {
+                       String table_date=cursor.getString(0);
+                       Log.d("table",table_date);
+                        if(table_date.equals(date))
+                        {
+                            flag=1;
+                        }
+                   }while (cursor.moveToNext());
+               }
+               cursor.close();
+               if(flag==0) {
+                   ContentValues values2 = new ContentValues();
+                   values2.put("date", date);
+                   values2.put("tag", 1);
+                   db.insert("Clock", null, values2);
+                   values2.clear();
+                   Toasty.custom(MyApplication.getContext(), "打卡成功", R.drawable.daka, R.color.colorzise, Toast.LENGTH_SHORT, true, true).show();
+               }
+               else
+               {
+                   Toasty.custom(MyApplication.getContext(), " 今日已打卡",R.drawable.tishi, R.color.colorzise,Toast.LENGTH_SHORT,true,true).show();
+               }
+               break;
+       }
     }
 }

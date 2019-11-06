@@ -46,7 +46,7 @@
                     android:ems="10"
                     android:hint="待办事务"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/colorBlue02">
+                    android:textColor="@color/colorAccent">
 
                 </EditText>
             </RelativeLayout>
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:text="选择标签"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/colorBlue02" />
+                        android:textColor="@color/colorAccent" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/details_repeat_choice"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/colorBlue02" />
+                        android:textColor="@color/colorAccent" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -227,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/details_tone_choice"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/colorBlue02" />
+                        android:textColor="@color/colorAccent" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -276,21 +276,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/wendu"
-            android:layout_marginLeft="90dp"
+            android:layout_marginLeft="140dp"
             android:text="晴"
             android:textColor="@color/colorBlue"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/fengli"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/wendu"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/type"
-            android:text="风向"
-            android:textColor="@color/colorBlue"
-            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/min"
@@ -298,7 +288,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/wendu"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/fengli"
+            android:layout_toRightOf="@id/type"
             android:text="0℃"
             android:textColor="@color/colorBlue"
             android:textSize="20dp" />

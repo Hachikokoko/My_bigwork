@@ -33,8 +33,8 @@ public class AlarmScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_screen);
 
-        //vibrator= (Vibrator) MyApplication.getContext().getSystemService(Service.VIBRATOR_SERVICE);
-        //vibrator.vibrate(new long[]{1000,10000,1000,10000},-1);
+        vibrator= (Vibrator) MyApplication.getContext().getSystemService(Service.VIBRATOR_SERVICE);
+        vibrator.vibrate(new long[]{1000,10000,1000,10000},-1);
         String name = getIntent().getStringExtra(AlarmSetClock.NAME);
         int timeHour = getIntent().getIntExtra(AlarmSetClock.TIME_HOUR, 0);
         int timeMinute = getIntent().getIntExtra(AlarmSetClock.TIME_MINUTE, 0);
@@ -51,7 +51,7 @@ public class AlarmScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mediaPlayer.stop();
-                //vibrator.cancel();
+                vibrator.cancel();
                 finish();
             }
         });
@@ -76,7 +76,7 @@ public class AlarmScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mediaPlayer.stop();
-                //vibrator.cancel();
+                vibrator.cancel();
                 finish();
             }
         };

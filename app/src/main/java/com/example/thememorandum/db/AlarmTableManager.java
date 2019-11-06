@@ -46,7 +46,7 @@ public class AlarmTableManager
     {
         ContentValues values=new ContentValues();
         values.put("alarmName",alarm.getName());
-        values.put("alarmName",alarm.getDate());
+        values.put("date",alarm.getDate());
         values.put("alarmhour",alarm.getHour());
         values.put("alarmminute",alarm.getMinute());
         values.put("music",alarm.getTone());

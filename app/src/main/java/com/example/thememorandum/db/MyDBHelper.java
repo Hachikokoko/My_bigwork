@@ -33,10 +33,10 @@ public class MyDBHelper extends SQLiteOpenHelper {
             +"date text,"
             +"alarmenable boolean)";
 
-
-
-
-
+    public static final String CREATE_DAKA="create table Clock("
+            +"id integer primary key autoincrement,"
+            +"date text,"
+            +"tag interger)";
 
     private Context mcontext;
     public MyDBHelper( Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -48,11 +48,15 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_ALARMTABLE);
         db.execSQL(CREATE_ALARMTABLE_Save);
+        db.execSQL(CREATE_DAKA);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("drop table if exists Alarm");
+        db.execSQL("drop table if exists Alarm_All");
+        db.execSQL("drop table if exists Clock");
+        onCreate(db);
     }
 }

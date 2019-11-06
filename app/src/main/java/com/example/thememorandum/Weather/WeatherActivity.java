@@ -14,6 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
 import com.example.thememorandum.Utils.Weather_WeekTool;
@@ -33,6 +37,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class WeatherActivity extends AppCompatActivity {
     private final static int SUCCESS = 1;
     private final static int FAIL = 0;
@@ -40,47 +46,25 @@ public class WeatherActivity extends AppCompatActivity {
     private EditText et_city;
     private Button bt_inquiry;
     private TextView tv_now;
-
     private TextView tv_aqi;
-
     private TextView tv_city;
-
-
     private TextView tv_note;
-
     private TextView tv_type0;
-
-
     private TextView tv_max0;
-
-
     private TextView tv_min0;
     private Button back_weather;
-
-
     private ArrayList<String> datelist=new ArrayList<>();
     private ArrayList<String> sunlist=new ArrayList<>();
     private ArrayList<String> minlist=new ArrayList<>();
     private ArrayList<String> maxlist=new ArrayList<>();
-
     private List<Weather_re> weather_reList=new ArrayList<>();
     private WeatherAdapter weatherAdapter = new WeatherAdapter(weather_reList);
     private RecyclerView recyclerView;
+    private String nowcity;
+    private LocationClient locationClient = null;
+    private LocationClientOption option;
 
-    private Handler mhandler =new Handler()
-    {
-        public void handleMessage(Message message)
-        {
-            switch (message.what)
-            {
-                case update:
-                    weather_reList.removeAll(weather_reList);
-                    weatherAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(weatherAdapter);
 
-            }
-        }
-    };
 
     private Handler handler = new Handler(){
         @Override
@@ -88,13 +72,27 @@ public class WeatherActivity extends AppCompatActivity {
             switch (msg.what) {
                 case SUCCESS:
                     WeatherInfo info = (WeatherInfo) msg.obj;
-
-
                     updateUI(info);
                     break;
                 case FAIL:
                     String str = (String) msg.obj;
-                    Toast.makeText(MyApplication.getContext(),str , Toast.LENGTH_SHORT).show();
+                    Toasty.custom(MyApplication.getContext(), str,R.drawable.tishi, R.color.colororange,Toast.LENGTH_SHORT,true,true).show();
+                    break;
+
+            }
+        }
+    };
+    private Handler handler2 = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SUCCESS:
+                    WeatherInfo info = (WeatherInfo) msg.obj;
+                    updateUI(info);
+                    break;
+                case FAIL:
+                    String str = (String) msg.obj;
+                    Toasty.custom(MyApplication.getContext(), str,R.drawable.tishi, R.color.colororange,Toast.LENGTH_SHORT,true,true).show();
                     break;
 
             }
@@ -106,9 +104,32 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         recyclerView=findViewById(R.id.re_view);
+        /*百度定位当前城市*/
+        locationClient = new LocationClient(getApplicationContext());
+        locationClient.registerLocationListener(new LocationListenner());
+        option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//高精度
+        option.setCoorType("gcj02");//国测局坐标；
+        option.setAddrType("all");
+        option.setScanSpan(10000);//置发起定位请求的间隔
+        option.setIsNeedAddress(true);
+        option.setOpenGps(true);
+        locationClient.setLocOption(option);
+        locationClient.start();
+        locationClient.requestLocation();
+        nowcity=this.getResources().getString(R.string.nowcity);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(MyApplication.getContext());
         linearLayoutManager.setOrientation(linearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message msg = Message.obtain();
+                getweather(nowcity);
+                msg.what=update;
+                msg.obj="更新recycleview";
+            }
+        }).start();
         init();
         back_weather.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,90 +161,86 @@ public class WeatherActivity extends AppCompatActivity {
         bt_inquiry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Message msg = Message.obtain();
-                        msg.what=update;
-                        msg.obj="更新recycleview";
-                        mhandler.sendMessage(msg);
-                    }
-                }).start();
 
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         String city = et_city.getText().toString();
-                        WeatherInfo info = new WeatherInfo(city);
-                        String sUrl = getResources().getString(R.string.api)+city;
-                        Log.d("TAG_APP", sUrl);
-                        try {
-                            URL url = new URL(sUrl);
-                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                            conn.setConnectTimeout(5000);
-                            conn.setRequestMethod("GET");
-                            int code = conn.getResponseCode();
-                            if (code != 200){
-                                fail("获取数据失败");
-                                return;
-                            }
-                            InputStream in = conn.getInputStream();
-                            String content = Weather_streamTool.transform(in);
-                            JSONObject jsonObject = new JSONObject(content);
-                            if (!"OK".equals(jsonObject.get("desc"))){
-                                fail("获取数据失败");
-                                return;
-                            }
-                            jsonObject = jsonObject.optJSONObject("data");
-                            String wendu = jsonObject.optString("wendu");
-                            String note = jsonObject.optString("ganmao");
-                            String aqi = jsonObject.optString("aqi");
-                            info.setWendu(wendu);
-                            if (!"".equals(aqi)){
-                                info.setAqi(Integer.parseInt(aqi));
-                            }
-                            info.setNote(note);
-                            JSONArray jsonArray = jsonObject.optJSONArray("forecast");
-                            for (int i=0;i<jsonArray.length();i++) {
-                                JSONObject obj = jsonArray.optJSONObject(i);
-                                Weather weather = new Weather();
-                                weather.fengxiang = obj.optString("fengxiang");
-                                weather.fengli = obj.optString("fengli");
-                                weather.date = obj.optString("date");
-                                String max[]=obj.optString("high").split(" ");
-                                weather.heigh = max[1];
-                                String min[]=obj.optString("low").split(" ");
-                                weather.low = min[1];
-                                weather.type = obj.optString("type");
-                                if(datelist.size()<=4)
-                                {
-                                    datelist.add(Weather_WeekTool.transform(weather.date));
-                                    sunlist.add(weather.type);
-                                    minlist.add(weather.low);
-                                    maxlist.add(weather.heigh);
-                                }
-
-                                info.addWeather(weather);
-                            }
-                            Message msg = Message.obtain();
-                            msg.what=SUCCESS;
-                            msg.obj=info;
-                            handler.sendMessage(msg);
-                            Log.d("TAG_APP","");
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        getweather(city);
                     }
                 }).start();
             }
         });
 
     }
+
+    private void getweather(String city)
+    {
+        WeatherInfo info = new WeatherInfo(city);
+        String sUrl = getResources().getString(R.string.api)+city;
+        //Log.d("TAG_APP", sUrl);
+        try {
+            URL url = new URL(sUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5000);
+            conn.setRequestMethod("GET");
+            int code = conn.getResponseCode();
+            if (code != 200){
+                fail("获取数据失败");
+                return;
+            }
+            InputStream in = conn.getInputStream();
+            String content = Weather_streamTool.transform(in);
+            JSONObject jsonObject = new JSONObject(content);
+            if (!"OK".equals(jsonObject.get("desc"))){
+                fail("获取数据失败");
+                return;
+            }
+            jsonObject = jsonObject.optJSONObject("data");
+            String wendu = jsonObject.optString("wendu");
+            String note = jsonObject.optString("ganmao");
+            String aqi = jsonObject.optString("aqi");
+            info.setWendu(wendu);
+            if (!"".equals(aqi)){
+                info.setAqi(Integer.parseInt(aqi));
+            }
+            info.setNote(note);
+            JSONArray jsonArray = jsonObject.optJSONArray("forecast");
+            for (int i=0;i<jsonArray.length();i++) {
+                JSONObject obj = jsonArray.optJSONObject(i);
+                Weather weather = new Weather();
+                weather.fengxiang = obj.optString("fengxiang");
+                weather.fengli = obj.optString("fengli");
+                weather.date = obj.optString("date");
+                String max[]=obj.optString("high").split(" ");
+                weather.heigh = max[1];
+                String min[]=obj.optString("low").split(" ");
+                weather.low = min[1];
+                weather.type = obj.optString("type");
+                if(datelist.size()<=4)
+                {
+                    datelist.add(Weather_WeekTool.transform(weather.date));
+                    sunlist.add(weather.type);
+                    minlist.add(weather.low);
+                    maxlist.add(weather.heigh);
+                }
+
+                info.addWeather(weather);
+            }
+            Message msg = Message.obtain();
+            msg.what=SUCCESS;
+            msg.obj=info;
+            handler.sendMessage(msg);
+            //Log.d("TAG_APP","");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void fail(String str) {
         Message msg = Message.obtain();
         msg.what = FAIL;
@@ -237,21 +254,14 @@ public class WeatherActivity extends AppCompatActivity {
         tv_now.setText(now);
         tv_note.setText(info.getNote()+"");
         tv_aqi.setText(info.getAqi()+"");
-
-
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         int week = cal.get(Calendar.DAY_OF_WEEK);
         setData(info.get(0),tv_max0,tv_min0,tv_type0,null);
-
-
-
-
         weather_reList.removeAll(weather_reList);
         init2();
         weatherAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(weatherAdapter);
-
     }
 
     protected void setData(Weather weather, TextView r_max, TextView r_min, TextView r_type, TextView r_date) {
@@ -344,5 +354,17 @@ public class WeatherActivity extends AppCompatActivity {
         sunlist.clear();
         minlist.clear();
         maxlist.clear();
+    }
+    class LocationListenner extends BDAbstractLocationListener {
+        public void onReceiveLocation(BDLocation location) {
+            String addr = location.getAddrStr();    //获取详细地址信息
+            String country = location.getCountry();    //获取国家
+            String province = location.getProvince();    //获取省份
+            String city = location.getCity();    //获取城市
+            String district = location.getDistrict();    //获取区县
+            String street = location.getStreet();    //获取街道信息
+            Log.d("123", city);
+            nowcity=city;
+        }
     }
 }

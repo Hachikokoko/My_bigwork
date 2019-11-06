@@ -53,7 +53,7 @@ public class MineFragment extends Fragment implements Main_mineView.OnRootClickL
                 .initi(R.drawable.beifen, "备份恢复",  true)
                 .setOnRootClickListener(this, 7));
         llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.clear, "清除",  true)
+                .initi(R.drawable.qingchu, "清除",  true)
                 .setOnRootClickListener(this, 8));
     }
 
@@ -98,7 +98,6 @@ public class MineFragment extends Fragment implements Main_mineView.OnRootClickL
                 position=8;
                 break;
         }
-        Toast.makeText(getActivity(),"点击了第"+position+"行",Toast.LENGTH_SHORT).show();
     }
 
     @Override

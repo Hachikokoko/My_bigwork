@@ -29,14 +29,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Weather.WeatherActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".Mine.Timer"></activity>
+        <activity android:name=".Mine.important_thing" />
+        <activity
+            android:name=".Weather.WeatherActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Alarm.AlarmDetailsActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Alarm.AlarmScreenActivity" />
         <activity android:name=".EditDiary_ALL.PlusImageActivity" />
-        <activity android:name=".EditDiary" />
+        <activity android:name=".EditDiary_ALL.EditDiary" />
         <activity android:name=".EditPlan" />
         <activity android:name=".Mine.User" />
         <activity android:name=".Login" />
@@ -67,8 +70,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver>
-        <!-- 百度地图 -->
+        </receiver> <!-- 百度地图 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="6qb7noXG4IrWtmEqLbkYXewjKOO2yijH" />

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.thememorandum.Alarm.AlarmAdapter;
 import com.example.thememorandum.Alarm.AlarmDetailsActivity;
@@ -30,6 +31,8 @@ import com.example.thememorandum.Utils.AlarmUtils;
 import com.example.thememorandum.Utils.MyApplication;
 import com.example.thememorandum.db.AlarmTableManager;
 import com.example.thememorandum.db.MyDBHelper;
+
+import net.frakbot.jumpingbeans.JumpingBeans;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,6 +55,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
     private Button addBtn;
     private Button daka;
     private MyDBHelper dbHelper;
+    private TextView mingyan;
 
     //初始化线程管理类，在UI中显示时间
     private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
@@ -78,6 +82,9 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
         dbHelper=new MyDBHelper(MyApplication.getContext(),"TP.db",null,1);
         daka=view.findViewById(R.id.daka);
         daka.setOnClickListener(this);
+        mingyan=view.findViewById(R.id.mingyan);
+        JumpingBeans jumpingBeans=JumpingBeans.with(mingyan).makeTextJump(0,mingyan.getText().length())
+                .setIsWave(true).setLoopDuration(3000).build();
         alarmAdapter = new AlarmAdapter(getActivity(), mList, new AlarmAdapter.OnClickCallBack() {
             @Override
             public void setAlarmEnable(long id, boolean isChecked) {
@@ -225,6 +232,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
        {
            case R.id.add_btn:
                startAlarmDetailsActivity(-1);
+               getActivity().overridePendingTransition(R.anim.push_from_top_in,R.anim.push_from_top_out);
                break;
            case R.id.daka:
                SQLiteDatabase db=dbHelper.getWritableDatabase();

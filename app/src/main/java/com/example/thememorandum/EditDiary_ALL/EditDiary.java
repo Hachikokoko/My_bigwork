@@ -1,4 +1,4 @@
-package com.example.thememorandum;
+package com.example.thememorandum.EditDiary_ALL;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import com.example.thememorandum.EditDiary_ALL.GridViewAdapter;
 import com.example.thememorandum.EditDiary_ALL.MainConstant;
 import com.example.thememorandum.EditDiary_ALL.PictureSelectorConfig;
 import com.example.thememorandum.EditDiary_ALL.PlusImageActivity;
+import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;

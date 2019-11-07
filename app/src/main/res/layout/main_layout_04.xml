@@ -19,29 +19,290 @@
             android:textColor="@color/colorblack"
             />
     </LinearLayout>
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/frgmentroot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:overScrollMode="never">
-        <LinearLayout
-            android:id="@+id/frgmentroot"
+        android:layout_height="40dp"
+        android:orientation="vertical">
+        <TextView
+            android:background="#5dbdef"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
+            android:text="我的"
+            android:textSize="15dp"
+            android:paddingTop="15dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/colorblack"
+            />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:background="#5dbdef"
+            <LinearLayout
+                android:background="@drawable/mine_layout_selecter"
+                android:id="@+id/mine_user"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="我的"
-                android:textSize="15dp"
-                android:paddingTop="15dp"
-                android:paddingLeft="20dp"
-                android:textColor="@color/colorblack"
-                />
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/user" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="账号"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18dp"/>
+                <ImageView
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/arrow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="205dp"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="68dp"
+                android:background="@color/colorBlue" />
+            <LinearLayout
+                android:background="@drawable/mine_layout_selecter"
+                android:id="@+id/mine_perrsonal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/personal_record" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="个人记录"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18dp"/>
+                <ImageView
+                    android:background="@drawable/arrow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="170dp"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="68dp"
+                android:background="@color/colorBlue" />
+            <LinearLayout
+                android:background="@drawable/mine_layout_selecter"
+                android:id="@+id/mine_team"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/team" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="团队记录"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18dp"/>
+                <ImageView
+                    android:background="@drawable/arrow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="170dp"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="68dp"
+                android:background="@color/colorBlue" />
+            <LinearLayout
+                android:background="@drawable/mine_layout_selecter"
+                android:id="@+id/mine_weather"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/tianqi02" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="天气预报"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18dp"/>
+                <ImageView
+                    android:background="@drawable/arrow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="170dp"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="68dp"
+                android:background="@color/colorBlue"/>
+            <LinearLayout
+                android:background="@drawable/mine_layout_selecter"
+                android:id="@+id/mine_important"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/tixing" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="重要事务"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18dp"/>
+                <ImageView
+                    android:background="@drawable/arrow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="170dp"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="68dp"
+                android:background="@color/colorBlue"/>
+            <LinearLayout
+                android:background="@drawable/mine_layout_selecter"
+                android:id="@+id/mine_timer"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/jishiqi" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="计时助手"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18dp"/>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="170dp"
+                    android:background="@drawable/arrow" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="68dp"
+                android:background="@color/colorBlue" />
+
+
+            <LinearLayout
+                android:background="@drawable/mine_layout_selecter"
+                android:id="@+id/mine_beifen"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/beifen" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="备份恢复"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18dp"/>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="170dp"
+                    android:background="@drawable/arrow" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="68dp"
+                android:background="@color/colorBlue" />
+            <LinearLayout
+                android:background="@drawable/mine_layout_selecter"
+                android:id="@+id/mine_clear"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/qingchu" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="清除数据"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18dp"/>
+                <ImageView
+                    android:background="@drawable/arrow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="170dp"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="68dp"
+                android:background="@color/colorBlue" />
         </LinearLayout>
 
-    </ScrollView>
+
+
+
 
 
 </LinearLayout>

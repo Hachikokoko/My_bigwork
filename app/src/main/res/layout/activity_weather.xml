@@ -4,31 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     android:orientation="vertical"
     tools:context=".Weather.WeatherActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:background="@color/colorBlue"
+        android:layout_height="50dp">
         <Button
             android:id="@+id/back_weather"
-            android:background="@drawable/back"
-            android:layout_width="40dp"
-            android:layout_height="40dp">
+            android:background="@drawable/back_white"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center">
         </Button>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="天气预报"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            android:layout_marginLeft="88dp"
+            />
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:background="@drawable/tianqi02"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+           />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:layout_marginLeft="5dp"
+            android:text="今日">
+
+        </TextView>
 
         <EditText
             android:id="@+id/et_city"
-            android:layout_width="88dp"
+            android:layout_width="94dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="140dp"
+            android:layout_marginLeft="135dp"
             android:background="@drawable/myview_edittext"
+            android:gravity="center"
             android:hint="东莞"
-            android:textColor="#eeb4b4"
-            android:gravity="center"/>
+            android:textColor="#eeb4b4" />
 
         <Button
             android:id="@+id/bt_inquiry"
@@ -37,6 +65,8 @@
             android:background="@drawable/chaxun" />
     </LinearLayout>
     <RelativeLayout
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -123,6 +153,7 @@
             android:textSize="30sp"
             android:id="@+id/tv_city"
             android:textColor="#eeb4b4"
+            android:layout_marginRight="5dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
         <LinearLayout
@@ -136,12 +167,14 @@
                 android:layout_height="wrap_content"
                 android:text="AQI: "
                 android:id="@+id/textView"
+
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50"
+                android:text="0"
                 android:id="@+id/tv_aqi"
+                android:layout_marginRight="5dp"
                 />
 
         </LinearLayout>
@@ -158,6 +191,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
         android:orientation="vertical">
         <ImageView
             android:id="@+id/tianqiyubao"
@@ -173,7 +207,8 @@
 
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginLeft="10dp"
         android:id="@+id/re_view"
         android:layout_width="match_parent"
-        android:layout_height="250dp"/>
+        android:layout_height="200dp"/>
 </LinearLayout>

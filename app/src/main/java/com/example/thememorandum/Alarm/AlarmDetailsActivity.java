@@ -228,6 +228,7 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
             case R.id.wendu_relativelayout:
                 Intent intent=new Intent(AlarmDetailsActivity.this, WeatherActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.touming_in,R.anim.touming_out);
                 break;
 
         }
@@ -254,7 +255,7 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
     private void showLabelSelectDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogStyle);
-        builder.setIcon(R.drawable.biaoqian02);
+        builder.setIcon(R.drawable.biaoqian);
         builder.setTitle("选择标签");
         builder.setItems(new String[]{"作息", "学习", "工作", "运动", "户外娱乐", "其它"},
                 new DialogInterface.OnClickListener() {
@@ -291,7 +292,7 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
     private void showToneSelectDialog() {
         // TODO Auto-generated method stub
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogStyle);
-        builder.setIcon(R.drawable.lingsheng02);
+        builder.setIcon(R.drawable.lingsheng);
         builder.setTitle("选择铃声");
         builder.setItems(new String[]{"铃声", "音乐或录音"},
                 new DialogInterface.OnClickListener() {
@@ -350,7 +351,7 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
             }
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogStyle);
-        builder.setIcon(R.drawable.zhongfu02);
+        builder.setIcon(R.drawable.zhongfu);
         builder.setTitle("请选择");
         builder.setMultiChoiceItems(R.array.repeat_days,
                 alarmModel.getRepeating_days(),
@@ -407,8 +408,8 @@ public class AlarmDetailsActivity extends AppCompatActivity implements View.OnCl
         intent.putExtra("id", alarmModel.getId());
         setResult(RESULT_OK, intent);
         finish();
-        overridePendingTransition(R.anim.push_from_right_in,
-                R.anim.push_from_right_out);
+        overridePendingTransition(R.anim.suoxiao_in,
+                R.anim.suoxiao_out);
     }
 
     @Override

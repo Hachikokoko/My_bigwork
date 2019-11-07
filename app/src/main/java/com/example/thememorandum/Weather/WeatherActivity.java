@@ -135,6 +135,7 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 WeatherActivity.this.finish();
+                overridePendingTransition(R.anim.push_from_left_in,R.anim.push_from_left_out);
             }
         });
 

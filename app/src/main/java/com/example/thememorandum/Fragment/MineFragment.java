@@ -2,6 +2,7 @@ package com.example.thememorandum.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Explode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,104 +13,89 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.thememorandum.Mine.Timer;
+import com.example.thememorandum.Mine.important_thing;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
 import com.example.thememorandum.Mine.User;
 import com.example.thememorandum.View.Main_mineView;
 import com.example.thememorandum.Weather.WeatherActivity;
 
-public class MineFragment extends Fragment implements Main_mineView.OnRootClickListener,Main_mineView.OnArrowClickListener
+public class MineFragment extends Fragment implements View.OnClickListener
 {
-    LinearLayout llroot;
+    private LinearLayout user;
+    private LinearLayout personal;
+    private LinearLayout team;
+    private LinearLayout weather;
+    private LinearLayout important;
+    private LinearLayout timer;
+    private LinearLayout benfen;
+    private LinearLayout clear;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view=inflater.inflate(R.layout.main_layout_04,container,false);
+        user=view.findViewById(R.id.mine_user);
+        personal=view.findViewById(R.id.mine_perrsonal);
+        team=view.findViewById(R.id.mine_team);
+        weather=view.findViewById(R.id.mine_weather);
+        important=view.findViewById(R.id.mine_important);
+        timer=view.findViewById(R.id.mine_timer);
+        benfen=view.findViewById(R.id.mine_beifen);
+        clear=view.findViewById(R.id.mine_clear);
+
+        user.setOnClickListener(this);
+        personal.setOnClickListener(this);
+        team.setOnClickListener(this);
+        weather.setOnClickListener(this);
+        important.setOnClickListener(this);
+        timer.setOnClickListener(this);
+        benfen.setOnClickListener(this);
+        clear.setOnClickListener(this);
+
+
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        llroot=getActivity().findViewById(R.id.frgmentroot);
-        llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.user, "账号",  true)
-                .setOnRootClickListener(this, 1));
-        llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.personal_record, "个人记录",  true)
-                .setOnRootClickListener(this, 2));
-        llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.team_record, "团队记录",  true)
-                .setOnRootClickListener(this, 3));
-        llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.tianqi02, "天气情况",  true)
-                .setOnRootClickListener(this, 4));
-        llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.shiwutixing, "重要事务",  true)
-                .setOnRootClickListener(this, 5));
-        llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.jishiqi, "计时助手",  true)
-                .setOnRootClickListener(this, 6));
-        llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.beifen, "备份恢复",  true)
-                .setOnRootClickListener(this, 7));
-        llroot.addView(new Main_mineView(MyApplication.getContext())
-                .initi(R.drawable.qingchu, "清除",  true)
-                .setOnRootClickListener(this, 8));
-    }
+
 
     public void onCreate(Bundle savedInstanceState) {
 
        super.onCreate(savedInstanceState);
 
+
    }
+
+
     @Override
-    public void onRootClick(View view)
-    {
-        Fragment fragment=null;
-        int position=0;
-        switch ((int)view.getTag())
+    public void onClick(View v) {
+        switch (v.getId())
         {
-            case 1:
-                Intent intent=new Intent(MyApplication.getContext(), User.class);
-                startActivity(intent);
-                position=1;
+            case R.id.mine_user:
                 break;
-            case 2:
-                position=2;
+            case R.id.mine_perrsonal:
                 break;
-            case 3:
-                position=3;
+            case R.id.mine_team:
                 break;
-            case 4:
+            case R.id.mine_weather:
                 Intent intent4=new Intent(MyApplication.getContext(), WeatherActivity.class);
                 startActivity(intent4);
-                position=4;
-            break;
-            case 5:
-                position=5;
-            break;
-            case 6:
-                position=6;
+                getActivity().overridePendingTransition(R.anim.push_from_right_in,R.anim.push_from_right_out);
                 break;
-            case 7:
-                position=7;
+            case R.id.mine_important:
+                Intent intent5=new Intent(MyApplication.getContext(), important_thing.class);
+                startActivity(intent5);
+                getActivity().overridePendingTransition(R.anim.push_from_right_in,R.anim.push_from_right_out);
                 break;
-            case 8:
-                position=8;
+            case R.id.mine_timer:
+                Intent intent6=new Intent(MyApplication.getContext(), Timer.class);
+                startActivity(intent6);
+                getActivity().overridePendingTransition(R.anim.push_from_right_in,R.anim.push_from_right_out);
+                break;
+            case R.id.mine_beifen:
+                break;
+            case R.id.mine_clear:
                 break;
         }
-    }
 
-    @Override
-    public void onArrowClick(View view) {
-
-    }
-    /*
-    * fragment的替换
-    * */
-    private void replaceFragment(Fragment fragment)
-    {
-        FragmentTransaction transaction=getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.main_layout_4,fragment).commit();
     }
 }

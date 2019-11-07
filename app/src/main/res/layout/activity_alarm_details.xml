@@ -71,12 +71,12 @@
                     android:background="@drawable/naozhong" />
 
                 <LinearLayout
+                    android:background="@drawable/layout_selecter"
                     android:id="@+id/set_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/naozhong"
-                    android:background="@drawable/alarm_list_bg_pressed"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/biaoqian"
-                    android:background="@drawable/alarm_list_bg_pressed"
+                    android:background="@drawable/layout_selecter"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -166,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/chongfu"
-                    android:background="@drawable/alarm_list_bg_pressed"
+                    android:background="@drawable/layout_selecter"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -211,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@id/lingsheng"
-                    android:background="@drawable/alarm_list_bg_pressed"
+                    android:background="@drawable/layout_selecter"
                     android:orientation="vertical"
                     android:padding="16dp">
 

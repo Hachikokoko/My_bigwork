@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.thememorandum.EditDiary;
+import com.example.thememorandum.EditDiary_ALL.EditDiary;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
 

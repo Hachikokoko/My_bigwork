@@ -2,16 +2,12 @@ package com.example.thememorandum.Alarm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
-import android.net.Network;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,9 +31,9 @@ import com.example.thememorandum.Utils.MyApplication;
 import com.example.thememorandum.Utils.NetworkUtil;
 import com.example.thememorandum.Utils.Weather_WeekTool;
 import com.example.thememorandum.Utils.Weather_streamTool;
-import com.example.thememorandum.Weather.Weather;
-import com.example.thememorandum.Weather.WeatherActivity;
-import com.example.thememorandum.Weather.WeatherInfo;
+import com.example.thememorandum.Mine.Weather.Weather;
+import com.example.thememorandum.Mine.Weather.WeatherActivity;
+import com.example.thememorandum.Mine.Weather.WeatherInfo;
 import com.example.thememorandum.db.AlarmTableManager;
 
 import org.json.JSONArray;

@@ -40,11 +40,6 @@ public class TeamFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view=inflater.inflate(R.layout.main_layout_02,container,false);
-        Button button = view.findViewById(R.id.togo);
-        TextView textView=view.findViewById(R.id.show);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String date=format.format(new Date());
-        textView.setText(date);
         return view;
     }
 

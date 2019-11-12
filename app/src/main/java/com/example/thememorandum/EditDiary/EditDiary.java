@@ -1,4 +1,4 @@
-package com.example.thememorandum.EditDiary_ALL;
+package com.example.thememorandum.EditDiary;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,15 +10,14 @@ import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.thememorandum.EditDiary_ALL.GridViewAdapter;
-import com.example.thememorandum.EditDiary_ALL.MainConstant;
-import com.example.thememorandum.EditDiary_ALL.PictureSelectorConfig;
-import com.example.thememorandum.EditDiary_ALL.PlusImageActivity;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
+import com.example.thememorandum.View.GradientTextView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
+
+import net.frakbot.jumpingbeans.JumpingBeans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,9 @@ public class EditDiary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_diary);
-
+        GradientTextView textView=findViewById(R.id.huiyitextview);
+        JumpingBeans jumpingBeans=JumpingBeans.with(textView).makeTextJump(0,textView.getText().length())
+                .setIsWave(true).setLoopDuration(3000).build();
         mContext = this;
         gridView = (GridView) findViewById(R.id.gridView);
         initGridView();
@@ -50,6 +51,7 @@ public class EditDiary extends AppCompatActivity {
                     if (mPicList.size() == MainConstant.MAX_SELECT_PIC_NUM) {
                         //最多添加5张图片
                         viewPluImg(position);
+
                     } else {
                         //添加凭证图片
                         selectPic(MainConstant.MAX_SELECT_PIC_NUM - mPicList.size());
@@ -70,7 +72,7 @@ public class EditDiary extends AppCompatActivity {
     }
 
     /**
-     * 打开相册或者照相机选择凭证图片，最多5张
+     * 打开相册或者照相机选择凭证图片，最多6张
      *
      * @param maxTotal 最多选择的图片的数量
      */
@@ -84,7 +86,7 @@ public class EditDiary extends AppCompatActivity {
             //被压缩后的图片路径
             if (localMedia.isCompressed()) {
                 String compressPath = localMedia.getCompressPath(); //压缩后的图片路径
-                Log.d("path",compressPath);
+                Log.d("path",localMedia.getPath());
                 mPicList.add(compressPath); //把图片添加到将要上传的图片数组中
                 mGridViewAddImgAdapter.notifyDataSetChanged();
             }

@@ -1,4 +1,4 @@
-package com.example.thememorandum.EditDiary_ALL;
+package com.example.thememorandum.EditDiary;
 
 import android.content.Intent;
 import android.os.Bundle;

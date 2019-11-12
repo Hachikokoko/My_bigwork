@@ -30,16 +30,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Mine.Timer"></activity>
-        <activity android:name=".Mine.important_thing" />
+        <activity android:name=".Mine.important_thing"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".Weather.WeatherActivity"
+            android:name=".Mine.Weather.WeatherActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Alarm.AlarmDetailsActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Alarm.AlarmScreenActivity" />
-        <activity android:name=".EditDiary_ALL.PlusImageActivity" />
-        <activity android:name=".EditDiary_ALL.EditDiary" />
+        <activity android:name=".EditDiary.PlusImageActivity" />
+        <activity android:name=".EditDiary.EditDiary"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".EditPlan" />
         <activity android:name=".Mine.User" />
         <activity android:name=".Login" />

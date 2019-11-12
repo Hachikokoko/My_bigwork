@@ -15,79 +15,78 @@
             android:layout_height="wrap_content"
             android:background="@color/colorBlue">
 
-            <TextView
-                android:id="@+id/mingyan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="及时当勉励，岁月不待人。——陶渊明"
-                android:background="@drawable/textview_border"
-                android:textColor="@color/colorWhite"
-                android:textSize="15sp" />
-
             <Button
+                android:layout_toRightOf="@id/date_tv"
                 android:id="@+id/daka"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="26.5dp"
-                android:layout_toRightOf="@id/mingyan"
+                android:layout_marginLeft="176dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/daka" />
-
-            <ImageView
-                android:id="@+id/shijianimg"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="8dp"
-                android:layout_below="@id/mingyan"
-                android:background="@drawable/shijian" />
-
             <TextView
                 android:id="@+id/date_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/mingyan"
                 android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@id/shijianimg"
                 android:text="2020年00月00日"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/time_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/date_tv"
-                android:layout_marginLeft="88dp"
-                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/date_tv"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="10dp"
                 android:text="12:00:00"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
+            <TextView
+                android:id="@+id/mingyan"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@id/date_tv"
+                android:layout_marginTop="22dp"
+                android:text="及时当勉励，岁月不待人。——陶渊明"
+                android:textColor="@color/colorWhite"
+                android:gravity="bottom"
+                android:textSize="15sp" />
 
         </RelativeLayout>
 
         <TextView
             android:id="@+id/daiban"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:layout_below="@id/rela_01"
+            android:layout_marginTop="3dp"
             android:layout_marginLeft="15dp"
             android:text="待办"
             android:textColor="@color/colorblack" />
+        <View
+            android:layout_below="@id/daiban"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorBlue" />
 
         <ListView
             android:id="@+id/list_item"
             android:layout_width="match_parent"
             android:layout_height="360dp"
             android:layout_below="@+id/daiban"
-            android:layout_marginBottom="45dp" />
+            android:divider="@color/colorBlue"
+            android:dividerHeight="1dp"
+            android:layout_marginBottom="45dp"
+            />
         <Button
             android:id="@+id/add_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_below="@+id/rela_01"
             android:layout_centerInParent="true"
-            android:layout_marginTop="384dp"
+            android:layout_marginTop="407dp"
             android:background="@drawable/add_after" />
     </RelativeLayout>
 

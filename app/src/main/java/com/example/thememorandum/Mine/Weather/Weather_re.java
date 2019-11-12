@@ -1,4 +1,4 @@
-package com.example.thememorandum.Weather;
+package com.example.thememorandum.Mine.Weather;
 
 public class Weather_re
 {

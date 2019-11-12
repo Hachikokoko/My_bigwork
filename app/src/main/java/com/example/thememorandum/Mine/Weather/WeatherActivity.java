@@ -1,4 +1,4 @@
-package com.example.thememorandum.Weather;
+package com.example.thememorandum.Mine.Weather;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

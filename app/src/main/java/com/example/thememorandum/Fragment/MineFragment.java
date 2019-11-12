@@ -2,24 +2,18 @@ package com.example.thememorandum.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Explode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.thememorandum.Mine.Timer;
 import com.example.thememorandum.Mine.important_thing;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
-import com.example.thememorandum.Mine.User;
-import com.example.thememorandum.View.Main_mineView;
-import com.example.thememorandum.Weather.WeatherActivity;
+import com.example.thememorandum.Mine.Weather.WeatherActivity;
 
 public class MineFragment extends Fragment implements View.OnClickListener
 {

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/activity_image"
     android:orientation="vertical"
-    tools:context=".EditDiary_ALL.PlusImageActivity">
+    tools:context=".EditDiary.PlusImageActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"

@@ -260,11 +260,11 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
                    values2.put("tag", 1);
                    db.insert("Clock", null, values2);
                    values2.clear();
-                   Toasty.custom(MyApplication.getContext(), "打卡成功", R.drawable.daka, R.color.colorzise, Toast.LENGTH_SHORT, true, true).show();
+                   Toasty.custom(MyApplication.getContext(), "打卡成功", R.drawable.daka, R.color.colorAccent, Toast.LENGTH_SHORT, true, true).show();
                }
                else
                {
-                   Toasty.custom(MyApplication.getContext(), " 今日已打卡",R.drawable.tishi, R.color.colorzise,Toast.LENGTH_SHORT,true,true).show();
+                   Toasty.custom(MyApplication.getContext(), " 今日已打卡",R.drawable.tishi, R.color.colorAccent,Toast.LENGTH_SHORT,true,true).show();
                }
                break;
        }

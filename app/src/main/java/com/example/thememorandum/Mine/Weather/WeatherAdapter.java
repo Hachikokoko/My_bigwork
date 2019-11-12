@@ -1,4 +1,4 @@
-package com.example.thememorandum.Weather;
+package com.example.thememorandum.Mine.Weather;
 
 import android.view.LayoutInflater;
 import android.view.View;

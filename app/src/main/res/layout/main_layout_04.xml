@@ -32,7 +32,7 @@
             android:textSize="15dp"
             android:paddingTop="15dp"
             android:paddingLeft="20dp"
-            android:textColor="@color/colorblack"
+            android:textColor="@color/colorWhite"
             />
     </LinearLayout>
         <LinearLayout
@@ -46,9 +46,9 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="13dp"
                     android:background="@drawable/user" />
                 <TextView
@@ -64,13 +64,13 @@
                     android:background="@drawable/arrow"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="205dp"
+                    android:layout_marginLeft="215dp"
                     />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginLeft="58dp"
                 android:background="@color/colorBlue" />
             <LinearLayout
                 android:background="@drawable/mine_layout_selecter"
@@ -79,9 +79,9 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="13dp"
                     android:background="@drawable/personal_record" />
                 <TextView
@@ -96,14 +96,14 @@
                     android:background="@drawable/arrow"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="170dp"
+                    android:layout_marginLeft="180dp"
                     />
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginLeft="58dp"
                 android:background="@color/colorBlue" />
             <LinearLayout
                 android:background="@drawable/mine_layout_selecter"
@@ -112,9 +112,9 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_marginTop="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="13dp"
                     android:background="@drawable/team" />
                 <TextView
@@ -129,14 +129,14 @@
                     android:background="@drawable/arrow"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="170dp"
+                    android:layout_marginLeft="180dp"
                     />
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginLeft="58dp"
                 android:background="@color/colorBlue" />
             <LinearLayout
                 android:background="@drawable/mine_layout_selecter"
@@ -145,10 +145,10 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="13dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tianqi02" />
                 <TextView
                     android:layout_marginTop="10dp"
@@ -162,13 +162,13 @@
                     android:background="@drawable/arrow"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="170dp"
+                    android:layout_marginLeft="180dp"
                     />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginLeft="58dp"
                 android:background="@color/colorBlue"/>
             <LinearLayout
                 android:background="@drawable/mine_layout_selecter"
@@ -177,9 +177,10 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tixing" />
                 <TextView
                     android:layout_marginTop="10dp"
@@ -193,13 +194,13 @@
                     android:background="@drawable/arrow"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="170dp"
+                    android:layout_marginLeft="180dp"
                     />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginLeft="58dp"
                 android:background="@color/colorBlue"/>
             <LinearLayout
                 android:background="@drawable/mine_layout_selecter"
@@ -208,9 +209,10 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/jishiqi" />
                 <TextView
                     android:layout_marginTop="10dp"
@@ -224,14 +226,14 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="170dp"
+                    android:layout_marginLeft="180dp"
                     android:background="@drawable/arrow" />
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginLeft="58dp"
                 android:background="@color/colorBlue" />
 
 
@@ -242,10 +244,10 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="13dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/beifen" />
                 <TextView
                     android:layout_marginTop="10dp"
@@ -259,13 +261,13 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="170dp"
+                    android:layout_marginLeft="180dp"
                     android:background="@drawable/arrow" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginLeft="58dp"
                 android:background="@color/colorBlue" />
             <LinearLayout
                 android:background="@drawable/mine_layout_selecter"
@@ -274,9 +276,10 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/qingchu" />
                 <TextView
                     android:layout_marginTop="10dp"
@@ -290,13 +293,13 @@
                     android:background="@drawable/arrow"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="170dp"
+                    android:layout_marginLeft="180dp"
                     />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="68dp"
+                android:layout_marginLeft="58dp"
                 android:background="@color/colorBlue" />
         </LinearLayout>
 

@@ -1,32 +1,64 @@
 package com.example.thememorandum.EditDiary;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.thememorandum.Alarm.AlarmSetClock;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
 import com.example.thememorandum.View.GradientTextView;
+import com.example.thememorandum.View.recordview;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import net.frakbot.jumpingbeans.JumpingBeans;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class EditDiary extends AppCompatActivity {
+import es.dmoral.toasty.Toasty;
+
+public class EditDiary extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
     private GridView gridView;
     private ArrayList<String> mPicList = new ArrayList<>(); //上传的图片凭证的数据源
     private GridViewAdapter mGridViewAddImgAdapter; //展示上传的图片的适配器
+    private Button back_button;
+    private TextView dateview;
+    private Button begin_record;
+    private recordview myrecordview;
+    private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    setData();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +69,24 @@ public class EditDiary extends AppCompatActivity {
                 .setIsWave(true).setLoopDuration(3000).build();
         mContext = this;
         gridView = (GridView) findViewById(R.id.gridView);
+        dateview=findViewById(R.id.date_show);
+        back_button=findViewById(R.id.back_timer);
+        back_button.setOnClickListener(this);
+        begin_record=findViewById(R.id.begin_record);
+        begin_record.setOnClickListener(this);
+        myrecordview=findViewById(R.id.recordview);
         initGridView();
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                //每1秒发送消息给handler
+                handler.sendEmptyMessage(1);
+            }
+        },0,1, TimeUnit.SECONDS);
+    }
+    private void setData(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        dateview.setText(format.format(new Date()));
     }
     private void initGridView() {
         mGridViewAddImgAdapter = new GridViewAdapter(mContext, mPicList);
@@ -72,7 +121,7 @@ public class EditDiary extends AppCompatActivity {
     }
 
     /**
-     * 打开相册或者照相机选择凭证图片，最多6张
+     * 打开相册或者照相机选择凭证图片，最多5张
      *
      * @param maxTotal 最多选择的图片的数量
      */
@@ -115,6 +164,43 @@ public class EditDiary extends AppCompatActivity {
             mPicList.clear();
             mPicList.addAll(toDeletePicList);
             mGridViewAddImgAdapter.notifyDataSetChanged();
+        }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(scheduledExecutorService != null){
+            scheduledExecutorService.shutdown();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.back_timer:
+                AlertDialog.Builder builder = new AlertDialog.Builder(EditDiary.this, R.style.MyDialogStyle02);
+                builder.setIcon(R.drawable.huiyi);
+                builder.setTitle("保存回忆");
+                builder.setMessage("嘿，完成了这个事务了吗？");
+                builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditDiary.this.finish();
+                    }
+                });
+                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditDiary.this.finish();
+                        Toasty.custom(MyApplication.getContext(), " 保存成功",R.drawable.clear, R.color.colorAccent, Toast.LENGTH_SHORT,true,true).show();
+                    }
+                });
+                builder.create().show();
+                break;
+            case R.id.begin_record:
+                myrecordview.start();
+                break;
         }
     }
 }

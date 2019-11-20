@@ -20,6 +20,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
+import com.example.thememorandum.Utils.NetworkUtil;
 import com.example.thememorandum.Utils.Weather_WeekTool;
 import com.example.thememorandum.Utils.Weather_streamTool;
 
@@ -103,6 +104,10 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        if (!NetworkUtil.isNetworkAbailable(this))
+        {
+            Toasty.custom(MyApplication.getContext(), " 无网络连接",R.drawable.duankai, R.color.colorRed,Toast.LENGTH_SHORT,true,true).show();
+        }
         recyclerView=findViewById(R.id.re_view);
         /*百度定位当前城市*/
         locationClient = new LocationClient(getApplicationContext());

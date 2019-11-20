@@ -5,5 +5,4 @@
     android:layout_height="60dp"
     android:background="@drawable/editdiary_bg_add_photo"
     android:scaleType="centerCrop">
-
 </ImageView>

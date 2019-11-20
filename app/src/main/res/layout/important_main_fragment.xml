@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Mine.important_thing.important_thing">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/reminder_list"/>
+            <TextView
+                android:id="@+id/empty"
+                android:text="无提醒事务"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:visibility="gone" />
+            <com.github.clans.fab.FloatingActionMenu
+                android:id="@+id/floating_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                fab:menu_icon="@mipmap/ic_add_white_24dp"
+                fab:menu_colorNormal="@color/colorBlue"
+                fab:menu_colorPressed="@color/colorBlue"
+                fab:menu_colorRipple="@color/colorBlue">
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/add_alert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_add_alert_white_24dp"
+                    fab:fab_size="normal"
+                    fab:fab_label="添加备忘"
+                    fab:menu_colorNormal="@color/colorBlue"
+                    fab:menu_colorPressed="@color/colorBlue"
+                    fab:menu_colorRipple="@color/colorBlue"/>
+            </com.github.clans.fab.FloatingActionMenu>
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

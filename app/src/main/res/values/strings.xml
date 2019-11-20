@@ -29,4 +29,7 @@
 
     <string name="screen_button">取  消</string>
     <string name="screen_msg">起床啦</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
 </resources>

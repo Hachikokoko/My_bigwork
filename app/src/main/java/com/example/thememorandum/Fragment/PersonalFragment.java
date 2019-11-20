@@ -207,8 +207,8 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
         final long mId = id;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogStyle);
         builder.setIcon(R.drawable.shanchu);
-        builder.setTitle("删除事务");
-        builder.setMessage("嘿，完成了这个事务了吗？");
+        builder.setTitle("Tips");
+        builder.setMessage("是否要删除该事务？");
         builder.setNegativeButton("取消", null);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
@@ -260,7 +260,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
                    values2.put("tag", 1);
                    db.insert("Clock", null, values2);
                    values2.clear();
-                   Toasty.custom(MyApplication.getContext(), "打卡成功", R.drawable.daka, R.color.colorAccent, Toast.LENGTH_SHORT, true, true).show();
+                   Toasty.custom(MyApplication.getContext(), "打卡成功", R.drawable.daka02, R.color.colorAccent, Toast.LENGTH_SHORT, true, true).show();
                }
                else
                {

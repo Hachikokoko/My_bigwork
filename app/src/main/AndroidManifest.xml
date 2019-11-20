@@ -20,6 +20,7 @@
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".Utils.MyApplication"
@@ -29,9 +30,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Mine.Timer"></activity>
-        <activity android:name=".Mine.important_thing"
-            android:windowSoftInputMode="adjustPan"/>
+
+        <activity android:name=".Mine.important_thing.createOrEditAlert" android:parentActivityName=".Mine.important_thing.important_thing"
+            android:windowSoftInputMode="adjustPan">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".Mine.important_thing.important_thing" />
+
+        </activity>
+        <activity android:name=".Mine.Timer" />
+        <activity
+            android:name=".Mine.important_thing.important_thing"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Mine.Weather.WeatherActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -40,9 +48,9 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Alarm.AlarmScreenActivity" />
         <activity android:name=".EditDiary.PlusImageActivity" />
-        <activity android:name=".EditDiary.EditDiary"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".EditPlan" />
+        <activity
+            android:name=".EditDiary.EditDiary"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Mine.User" />
         <activity android:name=".Login" />
         <activity
@@ -72,7 +80,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver> <!-- 百度地图 -->
+        </receiver>
+        <!-- 百度地图 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="6qb7noXG4IrWtmEqLbkYXewjKOO2yijH" />
@@ -81,6 +90,29 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+        <!-- 备忘录功能 -->
+        <receiver android:name=".Mine.important_thing.AlarmSetter">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".Mine.important_thing.AlarmReceiver"
+            android:enabled="true" />
+
+        <service
+            android:name=".Mine.important_thing.AlarmService02"
+            android:enabled="true" />
+
+        <provider
+            android:name=".Mine.important_thing.ReminderContentProvider"
+            android:authorities="com.example.thememorandum"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:label="LentItemsProvider"
+            android:readPermission="com.example.thememorandum.READ"
+            android:writePermission="com.example.thememorandum.WRITE" />
     </application>
 
 </manifest>

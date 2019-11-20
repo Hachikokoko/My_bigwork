@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.thememorandum.Mine.Timer;
-import com.example.thememorandum.Mine.important_thing;
+import com.example.thememorandum.Mine.important_thing.important_thing;
 import com.example.thememorandum.R;
 import com.example.thememorandum.Utils.MyApplication;
 import com.example.thememorandum.Mine.Weather.WeatherActivity;

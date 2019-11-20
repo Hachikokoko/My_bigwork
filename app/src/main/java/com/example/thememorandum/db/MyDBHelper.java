@@ -38,6 +38,14 @@ public class MyDBHelper extends SQLiteOpenHelper {
             +"date text,"
             +"tag interger)";
 
+    public static final String CREATE_REMINDER="create table reminders("
+            +"id integer primary key autoincrement,"
+            +"type text,"
+            +"title text,"
+            +"content text,"
+            +"time text,"
+            +"frequency long)";
+
     private Context mcontext;
     public MyDBHelper( Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -49,6 +57,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_ALARMTABLE);
         db.execSQL(CREATE_ALARMTABLE_Save);
         db.execSQL(CREATE_DAKA);
+        db.execSQL(CREATE_REMINDER);
 
     }
 
@@ -57,6 +66,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists Alarm");
         db.execSQL("drop table if exists Alarm_All");
         db.execSQL("drop table if exists Clock");
+        db.execSQL("drop table if exists reminders");
         onCreate(db);
     }
 }

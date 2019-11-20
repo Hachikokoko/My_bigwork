@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorBlue</item>
         <item name="colorPrimaryDark">@color/colorBlue</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:actionModeBackground">@color/colorBlue</item>
+        <item name="actionModeBackground">@color/colorBlue</item>
     </style>
 
     <!--Editdiary-->
@@ -41,6 +45,21 @@
         <item name="android:background">@color/colorBlue02</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
+    <style name="MyDialogStyle02" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowAnimationStyle">@style/Base.Animation.AppCompat.Dialog</item>
+        <!--<item name="android:windowFrame">@null</item>-->
+        <!--是否浮在窗口之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--是否显示title-->
+        <item name="android:windowNoTitle">true</item>
+        <!--dialog之外没有焦点的区域是否罩上黑色半透明-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@color/colorBlue</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
 
 
 </resources>

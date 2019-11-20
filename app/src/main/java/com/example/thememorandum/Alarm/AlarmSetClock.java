@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.thememorandum.Mine.important_thing.AlarmService02;
 import com.example.thememorandum.db.AlarmTableManager;
 
 import java.util.Calendar;

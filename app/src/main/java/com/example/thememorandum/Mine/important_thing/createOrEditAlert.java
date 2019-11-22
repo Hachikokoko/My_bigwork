@@ -221,7 +221,7 @@ public class createOrEditAlert extends AppCompatActivity {
 
     private AlertDialog createSaveDialog(final ReminderItem item) {
         return new AlertDialog.Builder(this,R.style.MyDialogStyle)
-                .setIcon(R.drawable.shanchu)
+                .setIcon(R.drawable.tips)
                 .setTitle("Tips")
                 .setMessage("是否要保存该备忘？")
                 .setPositiveButton("是", new DialogInterface.OnClickListener() {

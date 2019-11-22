@@ -48,7 +48,7 @@
             android:layout_width="94dp"
             android:layout_height="45dp"
             android:layout_marginLeft="135dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:background="@drawable/myview_edittext"
             android:gravity="center"
             android:hint="东莞"
@@ -61,6 +61,7 @@
             android:background="@drawable/chaxun" />
     </LinearLayout>
     <RelativeLayout
+        android:layout_marginTop="2dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
@@ -75,7 +76,7 @@
             android:textSize="90sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:textColor="#1296db"/>
+            android:textColor="@color/colorBlue02"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,7 +98,7 @@
             android:layout_toEndOf="@+id/tv_now_0"
             android:paddingTop="10dp"
             android:id="@+id/textView2"
-            android:textColor="#1296db"/>
+            android:textColor="@color/colorBlue02"/>
 
         <TextView
             android:id="@+id/tv_min_0"
@@ -120,6 +121,7 @@
             android:layout_alignEnd="@+id/textView2"
             android:layout_marginEnd="-22dp"
             android:layout_marginBottom="6dp"
+            android:textColor="@color/colorBlue02"
             android:text="~" />
 
         <TextView

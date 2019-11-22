@@ -22,6 +22,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="176dp"
                 android:layout_marginTop="15dp"
+                android:textColor="@color/colorBlue02"
                 android:background="@drawable/daka" />
             <TextView
                 android:id="@+id/date_tv"
@@ -39,9 +40,18 @@
                 android:layout_toRightOf="@id/date_tv"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="10dp"
-                android:text="12:00:00"
-                android:textColor="@color/white"
+                android:text="12:00:"
+                android:textColor="@color/colorBlue02"
                 android:textSize="25sp" />
+            <TextView
+                android:id="@+id/time_tv02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/time_tv"
+                android:textSize="25sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:text="00"/>
             <TextView
                 android:id="@+id/mingyan"
                 android:layout_width="wrap_content"
@@ -50,7 +60,7 @@
                 android:layout_below="@id/date_tv"
                 android:layout_marginTop="22dp"
                 android:text="及时当勉励，岁月不待人。——陶渊明"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorAccent"
                 android:gravity="bottom"
                 android:textSize="15sp" />
 

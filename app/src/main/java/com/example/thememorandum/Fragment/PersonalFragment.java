@@ -48,7 +48,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class PersonalFragment extends Fragment implements View.OnClickListener
 {
-    private TextView datetv,timetv;//年月日和时间
+    private TextView datetv,timetv,timetv02;//年月日和时间
     private AlarmTableManager tableManager;
     private AlarmAdapter alarmAdapter;
     private List<AlarmModel> mList = new ArrayList<>();
@@ -75,6 +75,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
         View view=inflater.inflate(R.layout.main_layout_01,container,false);
         datetv = (TextView) view.findViewById(R.id.date_tv);
         timetv = (TextView) view.findViewById(R.id.time_tv);
+        timetv02 = (TextView) view.findViewById(R.id.time_tv02);
         tableManager = new AlarmTableManager(getActivity());
         ListView listView = view.findViewById(R.id.list_item);
         addBtn = view.findViewById(R.id.add_btn);
@@ -123,8 +124,11 @@ public class PersonalFragment extends Fragment implements View.OnClickListener
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         datetv.setText(format.format(new Date()));
 
-        SimpleDateFormat format1 = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat format1 = new SimpleDateFormat("hh:mm:");
         timetv.setText(format1.format(new Date()));
+
+        SimpleDateFormat format2 = new SimpleDateFormat("ss");
+        timetv02.setText(format2.format(new Date()));
     }
 
     @Override
